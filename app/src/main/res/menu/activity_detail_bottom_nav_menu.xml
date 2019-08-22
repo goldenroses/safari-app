@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_explore"
+            android:icon="@drawable/ic_explore"
+            android:title="Share"/>
+
+    <item
+            android:id="@+id/navigation_favorites"
+            android:icon="@drawable/ic_compare_arrows"
+            android:title="Book Guide"/>
+
+    <item
+            android:id="@+id/navigation_reviews"
+            android:icon="@drawable/ic_stars"
+            android:title="Reviews"/>
+    <item
+            android:id="@+id/navigation_admin"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="Admin"/>
+</menu>
