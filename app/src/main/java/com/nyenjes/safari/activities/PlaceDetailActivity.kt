@@ -84,26 +84,6 @@ class PlaceDetailActivity : AppCompatActivity() {
 
             }
 
-
-//                val viewPagerAdapter = PagerAdapter(baseContext, imagesObject.imageUrl!!)
-
-//                detailViewPager.adapter = viewPagerAdapter
-
-//                if (imagesObject != null) {
-//
-//                    imagesObject.imageUrl!!.forEach {
-//                        Log.d(TAG, "IMAGE LOcation ${it}")
-//                        //Save image
-//
-//                        //Load carousel
-//
-//                    }
-//                } else {
-//                    Log.d(TAG, "NO IMAGES FOUND!")
-//
-//                }
-
-
         })
     }
 

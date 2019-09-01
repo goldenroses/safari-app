@@ -35,7 +35,7 @@ class FirebaseManager {
 
     fun isAdmin(uid: String) {
         Log.d(TAG, "Checking if isAdmin : ${_isAdmin}")
-        val adminDbRef: DatabaseReference = _firebaseDb!!.reference.child("admins").child(uid)
+//        val adminDbRef: DatabaseReference = _firebaseDb!!.reference.child("admins").child(uid)
         val listener = object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.d(TAG, "onCancelled")
@@ -62,8 +62,8 @@ class FirebaseManager {
 
         }
 
-        adminDbRef.addChildEventListener(listener)
-        Log.d(TAG, "Checking if isAdmin after listener again: ${_isAdmin}")
+//        adminDbRef.addChildEventListener(listener)
+//        Log.d(TAG, "Checking if isAdmin after listener again: ${_isAdmin}")
 
     }
 
@@ -78,7 +78,6 @@ class FirebaseManager {
             if (true) {
 
                 Log.d(TAG, "onAuthStateChanged:signed_in:::::" + _user!!.getUid());
-
                 isLoggedIn = true
 
             } else {

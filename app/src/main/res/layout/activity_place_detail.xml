@@ -56,12 +56,15 @@
 
                         <TextView
                                 android:text="About"
+                                android:scrollbars="vertical"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textContentDetailTitle"
                                 android:textAlignment="center" android:textSize="30sp"
                                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintVertical_bias="0.0" android:layout_marginEnd="280dp"/>
+                                app:layout_constraintVertical_bias="1.0"
+                                android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintHorizontal_bias="0.106"/>
                         <ImageView
                                 android:layout_gravity="center_horizontal"
                                 android:tint="@color/colorAccent"
@@ -69,7 +72,8 @@
                                 android:layout_width="36dp"
                                 android:src="@drawable/ic_fave_border"
                                 android:id="@+id/favorite"
-                                android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_marginEnd="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="5dp"
                                 app:layout_constraintBottom_toBottomOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>

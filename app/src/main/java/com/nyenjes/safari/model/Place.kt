@@ -3,10 +3,10 @@ package com.nyenjes.safari.model
 import com.google.gson.annotations.SerializedName
 
 class Place(
-    @SerializedName("id") val id: Long? = null,
-    @SerializedName("title") val title: String? = null,
-    @SerializedName("description")val description: String? = null,
-    @SerializedName("imageUrl") val imageUrl: String? = null,
-    @SerializedName("cardImage") val cardImage: String? = null,
-    @SerializedName("content") val content: String? = null
+    @SerializedName("id") var id: Long? = null,
+    @SerializedName("title") var title: String? = null,
+    @SerializedName("description")var description: String? = null,
+    @SerializedName("imageUrl") var imageUrl: String? = null,
+    @SerializedName("cardImage") var cardImage: String? = null,
+    @SerializedName("content") var content: String? = null
 )
