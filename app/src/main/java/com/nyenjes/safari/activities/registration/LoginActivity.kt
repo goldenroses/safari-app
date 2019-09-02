@@ -85,6 +85,7 @@ class LoginActivity : AppCompatActivity() {
                             val uid = it.result!!.user.uid
                             _firebaseManager.isAdmin(uid)
                             val intent: Intent = Intent(this, MainActivity::class.java)
+                            Toast.makeText(this, "Successfully authenticated", Toast.LENGTH_SHORT).show()
                             startActivity(intent)
                         }
                         if(it.isCanceled) {
