@@ -1,14 +1,11 @@
 package com.nyenjes.safari.managers
 
 import com.nyenjes.safari.model.Place
-import com.nyenjes.safari.providers.SafariDataProvider
 import com.nyenjes.safari.repositories.FavoritesRepository
 
-class SafariDataManager (private val safariDataProvider: SafariDataProvider,
-                         private val favoritesRepository: FavoritesRepository) {
+class SafariDataManager (private val favoritesRepository: FavoritesRepository) {
 
     private var favoritesCache: ArrayList<Place>? = null
-
 
     fun getAllFavorites(): ArrayList<Place>? {
 
@@ -26,11 +23,11 @@ class SafariDataManager (private val safariDataProvider: SafariDataProvider,
     }
 
 
-    fun removeFavorite(placeId: Long) {
-
-        favoritesRepository.removeFavoriteById(placeId)
+    fun removeFavorite(place: Place) {
+        favoritesRepository.removeFavoriteById(place.id!!)
+        favoritesCache!!.remove(place)
         favoritesCache!!.filter {
-            it.id != placeId
+            it.id != place.id!!
         } as ArrayList<Place>
     }
 

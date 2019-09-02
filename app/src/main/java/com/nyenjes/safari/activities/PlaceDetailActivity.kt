@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +13,10 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.storage.FileDownloadTask
 import com.google.gson.Gson
 import com.nyenjes.safari.R
+import com.nyenjes.safari.SafariApplication
 import com.nyenjes.safari.adapters.PagerAdapter
 import com.nyenjes.safari.managers.FirebaseManager
+import com.nyenjes.safari.managers.SafariDataManager
 import com.nyenjes.safari.model.Image
 import com.nyenjes.safari.model.Place
 import com.nyenjes.safari.services.AwsService
@@ -21,6 +24,7 @@ import com.nyenjes.safari.services.PlaceService
 import com.nyenjes.safari.services.ServiceBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_place_detail.*
+import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +32,7 @@ import java.io.File
 
 
 class PlaceDetailActivity : AppCompatActivity() {
+
     private var _firebaseManager: FirebaseManager? = FirebaseManager()
     private var placeObject: Place = Place()
     private var placeService: PlaceService? = null
@@ -35,11 +40,15 @@ class PlaceDetailActivity : AppCompatActivity() {
     private var imageView: ImageView? = null
     private val TAG: String = "MainActivity"
 
+    private var safariManager: SafariDataManager? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_detail)
 
         Picasso.with(this).setIndicatorsEnabled(true)
+
+        safariManager = (applicationContext as SafariApplication).safariDataManager
 
         val place = intent.getStringExtra("currentPlaceItem")
         placeObject = Gson().fromJson(place, Place::class.java)
@@ -47,11 +56,12 @@ class PlaceDetailActivity : AppCompatActivity() {
         supportActionBar!!.title = placeObject.title
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        placeObject.id
         placeService = ServiceBuilder.buildService(PlaceService::class.java)
         awsService = ServiceBuilder.buildService(AwsService::class.java)
 
         getImageFromBucket()
+        imageView = findViewById(R.id.favorite)
+        loadFave()
 
         textContentDetail.text = placeObject.content
     }
@@ -87,78 +97,46 @@ class PlaceDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun getImage() {
-        _firebaseManager!!.connectStorage(placeObject.title!!)
-        val placeRef = _firebaseManager!!._firebaseStorageReference!!
-
-        val localFile = File.createTempFile("images", "jpg")
-        placeRef.getFile(localFile).addOnSuccessListener(object : OnSuccessListener<FileDownloadTask.TaskSnapshot> {
-            override fun onSuccess(downloadTask: FileDownloadTask.TaskSnapshot?) {
-
-                val downloadUri = downloadTask!!.storage.downloadUrl
-
-
-                if (downloadUri.isSuccessful) {
-//                        val downloadPath09 = downloadUri.result!!.path.toString()
-//                        val downloadPath01 = downloadUri.result!!.encodedPath.toString()
-                    val downloadPath = downloadUri.toString()
-                    Log.d("DOWNLOADING IMAGES", ": imageUrl : ${downloadPath}")
-                    //Save image
-
-//                        showImage(downloadPath)
-
-                } else {
-                    Log.d("DOWNLOADING IMAGE", "failure!")
-                    Toast.makeText(detailViewPager.context, "Image upload failed, try again", Toast.LENGTH_LONG).show()
-
-                }
-            }
-        }).addOnFailureListener {
-            Log.d("UPLOAD IMAGE", "failure! : ${it.message}")
-
-        }
-    }
-
-
-    fun showImage(url: String) {
-
-        if (url.isEmpty() == false) {
-            val width = Resources.getSystem().displayMetrics.widthPixels
-//            Picasso.with(this).load(url).resize(width, width*2/3).centerCrop().into(detailViewPager)
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_fave, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    fun loadFave() {
         try {
-            if (item!!.itemId == android.R.id.home) {
-                finish()
-            } else if (item.itemId == R.id.action_favorite) {
-//                if(!neuzDataManager!!.getIsFavorite(neuzData!!.title)) {
-                Toast.makeText(this, "Adding to favorite", Toast.LENGTH_SHORT).show()
-//                    val response = neuzDataManager!!.addFavorites(neuzData!!)
-//                }else {
-                Toast.makeText(this, "Removing from favorite", Toast.LENGTH_SHORT).show()
-
-//
-//                    neuzDataManager!!.removeFavorites(neuzData!!.title)
-//                }
+            if(safariManager!!.getIsFavorite(placeObject.id!!)) {
+                imageView!!.setImageResource(R.drawable.ic_fave)
+                toast("placeObject.id is in favorites!")
+            }
+            else {
+                imageView!!.setImageResource(R.drawable.ic_fave_border)
+                toast("placeObject.id NOT in favorites!")
 
             }
-
-        } catch (ex: Exception) {
-
+        } catch (e: Exception) {
+            toast("Unable to fetch fave icon : ${e}")
         }
-
-        return true
     }
 
-    companion object {
-        const val PICTURE_RESULT_CODE = 34
+    fun favorite(view: View) {
+        Log.d("Here", "Clicked" +placeObject)
+
+        try {
+            if(safariManager!!.getIsFavorite(placeObject.id!!)) {
+                safariManager!!.removeFavorite(placeObject)
+                imageView!!.setImageResource(R.drawable.ic_fave_border)
+
+                toast("Place removed from favorites!")
+            }
+            else {
+                safariManager!!.addFavorite(placeObject)
+                imageView!!.setImageResource(R.drawable.ic_fave)
+                toast("Place added to favorites!")
+
+            }
+        } catch (e: Exception) {
+            toast("Unable to update : ${e}")
+        }
 
     }
 }
