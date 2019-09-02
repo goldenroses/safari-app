@@ -12,9 +12,9 @@ class SafariDbOpenHelper(context: Context): ManagedSQLiteOpenHelper(context, "sa
             "id" to INTEGER + PRIMARY_KEY,
             "title" to TEXT,
             "description" to TEXT,
-            "content" to TEXT,
-            "imageUrl" to TEXT
-
+            "imageUrl" to TEXT,
+            "cardImage" to TEXT,
+            "content" to TEXT
         )
     }
 

@@ -66,6 +66,7 @@
                                 android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintHorizontal_bias="0.106"/>
                         <ImageView
+                                android:onClick="favorite"
                                 android:layout_gravity="center_horizontal"
                                 android:tint="@color/colorAccent"
                                 android:layout_height="36dp"
