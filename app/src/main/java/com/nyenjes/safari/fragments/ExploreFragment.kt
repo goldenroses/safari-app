@@ -92,6 +92,7 @@ class ExploreFragment : Fragment() {
     }
 
     fun refreshPage(view: View) {
+        fragmentManager!!.beginTransaction().detach(this).attach(this).commit();
         Log.d(TAG, "refreshPage")
     }
 }
