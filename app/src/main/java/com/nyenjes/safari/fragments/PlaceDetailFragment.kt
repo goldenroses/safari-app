@@ -1,7 +1,7 @@
 package com.nyenjes.safari.fragments
 
-
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.nyenjes.safari.R
 import com.nyenjes.safari.SafariApplication
+import com.nyenjes.safari.activities.PlaceDetailActivity
 import com.nyenjes.safari.adapters.PagerAdapter
 import com.nyenjes.safari.managers.FirebaseManager
 import com.nyenjes.safari.managers.SafariDataManager
@@ -26,10 +27,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class PlaceDetailFragment : Fragment() {
 
     private var _firebaseManager: FirebaseManager? = FirebaseManager()
-    private var placeService: PlaceService? = null
     private var imageView: ImageView? = null
     private val TAG: String = "PlaceDetailFragment"
     private var awsService: AwsService? = null
@@ -49,17 +50,20 @@ class PlaceDetailFragment : Fragment() {
 
         safariManager = (activity!!.applicationContext as SafariApplication).safariDataManager
 
-        placeService = ServiceBuilder.buildService(PlaceService::class.java)
         awsService = ServiceBuilder.buildService(AwsService::class.java)
 
         imageView = root!!.findViewById(R.id.favorite)
-        loadFave()
 
         val place = activity!!.intent.getStringExtra("currentPlaceItem")
         placeObject = Gson().fromJson(place, Place::class.java)
 
+        //set placeId in parent activity
+        (activity as PlaceDetailActivity).placeObject = placeObject
+
         root!!.textPlaceContent.text = placeObject.content
+        root!!.textPlaceContent.setMovementMethod(ScrollingMovementMethod())
         getImageFromBucket()
+        loadFave()
 
         return root
     }
@@ -71,7 +75,7 @@ class PlaceDetailFragment : Fragment() {
 
         call.enqueue(object : Callback<List<Image>> {
             override fun onFailure(call: Call<List<Image>>, t: Throwable) {
-                Log.d(TAG, "placeService.getImageFromBucket() failed: ${t.message}")
+                Log.d(TAG, "getImageFromBucket() failed: ${t.message}")
             }
 
             override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
@@ -87,9 +91,10 @@ class PlaceDetailFragment : Fragment() {
                 }
 
                 val viewPagerAdapter = PagerAdapter(root!!.context, imageUrls)
-
+                if (detailViewPager == null){
+                   return
+                }
                 detailViewPager.adapter = viewPagerAdapter
-
             }
 
         })
@@ -103,13 +108,12 @@ class PlaceDetailFragment : Fragment() {
             }
             else {
                 imageView!!.setImageResource(R.drawable.ic_fave_border)
-
             }
         } catch (e: Exception) {
         }
     }
 
-    fun favorite(view: View) {
+    fun favoritePlace(view: View) {
         Log.d("Here", "Clicked" +placeObject)
 
         try {

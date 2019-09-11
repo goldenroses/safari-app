@@ -1,6 +1,7 @@
 package com.nyenjes.safari.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nyenjes.safari.fragments.ExploreFragment
@@ -51,4 +52,11 @@ class MainActivity : AppCompatActivity() {
         true
     }
 
+    fun refreshPage(view: View) {
+        exploreFragment.refreshPage(view)
+    }
+
+    fun refreshReviewPage(view: View) {
+        reviewFragment.refreshPage(view)
+    }
 }

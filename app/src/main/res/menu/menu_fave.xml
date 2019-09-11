@@ -5,4 +5,9 @@
             android:id="@+id/action_favorite"
             app:showAsAction="always"
             android:title="Chat"/>
+    <item
+            android:id="@+id/action_share"
+            android:icon="@drawable/ic_share"
+            app:showAsAction="withText"
+            android:title="Share"/>
 </menu>

@@ -1,6 +1,5 @@
 package com.nyenjes.safari.fragments
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.nyenjes.safari.adapters.CardAdapter
 import com.nyenjes.safari.model.Place
 import com.nyenjes.safari.services.PlaceService
 import com.nyenjes.safari.services.ServiceBuilder
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_explore.*
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,15 +35,17 @@ class ExploreFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_explore, container, false)
 
-        progressBar = view.findViewById(R.id.progressBar)
+        progressBar = view.findViewById(R.id.exploreProgressBar)
+        showDialog()
         // Fetch Places
         val placeService = ServiceBuilder.buildService(PlaceService::class.java)
 
         val call = placeService.getPlaces()
         call.enqueue(object: Callback<List<Place>> {
             override fun onFailure(call: retrofit2.Call<List<Place>>, t: Throwable) {
-                Log.d(TAG, "placeService.getPlaces() failed")
+                Log.d(TAG, "placeService.getReviews() failed")
                 hideDialog()
+                errorMessageCard.isVisible = true
                 btnRetry.isVisible = true
             }
 
@@ -67,14 +67,12 @@ class ExploreFragment : Fragment() {
                 adapter.notifyDataSetChanged()
                 hideDialog()
             }
-
         })
 
         recycler = view.findViewById(R.id.recycler)
         recycler!!.layoutManager = LinearLayoutManager(context)
         recycler!!.adapter = adapter
-        showDialog()
-
+//        showDialog()
 
         // Inflate the layout for this fragment
         return view

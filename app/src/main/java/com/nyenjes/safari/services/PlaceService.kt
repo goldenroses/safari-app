@@ -2,7 +2,8 @@ package com.nyenjes.safari.services
 
 import com.nyenjes.safari.model.Place
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface PlaceService {
 
