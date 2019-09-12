@@ -17,98 +17,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/recycler"/>
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:padding="16dp"
+    <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_marginTop="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:id="@+id/cardView"
-                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp">
-            <androidx.viewpager.widget.ViewPager
-                    android:layout_width="match_parent"
-                    android:layout_height="230sp"
-                    android:id="@+id/detailViewPager"/>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-        >
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_marginBottom="18dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                        <TextView
-                                android:text="About"
-                                android:scrollbars="vertical"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/textContentDetailTitle"
-                                android:textAlignment="center" android:textSize="30sp"
-                                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintVertical_bias="1.0"
-                                android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintHorizontal_bias="0.106"/>
-                        <ImageView
-                                android:onClick="favorite"
-                                android:layout_gravity="center_horizontal"
-                                android:tint="@color/colorAccent"
-                                android:layout_height="36dp"
-                                android:layout_width="36dp"
-                                android:src="@drawable/ic_fave_border"
-                                android:id="@+id/favorite"
-                                android:layout_marginEnd="8dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="5dp"
-                                app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-                <ImageView
-                        android:layout_gravity="center_horizontal"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:tint="@color/colorPrimary"
-                        android:paddingTop="10px"
-                        android:paddingBottom="5px"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:src="@android:drawable/divider_horizontal_bright" />
-
-                <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dip"
-                        android:background="#000000" />
-
-                <TextView
-                        android:text="content"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textContentDetail"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:textAlignment="center" android:textSize="18sp"
-                />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="0dp"
