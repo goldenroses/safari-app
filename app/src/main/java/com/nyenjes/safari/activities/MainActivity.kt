@@ -1,5 +1,6 @@
 package com.nyenjes.safari.activities
 
+import android.app.Service
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,18 +9,19 @@ import com.nyenjes.safari.fragments.ExploreFragment
 import com.nyenjes.safari.fragments.FavoritesFragment
 import com.nyenjes.safari.fragments.ReviewFragment
 import com.nyenjes.safari.R
+import com.nyenjes.safari.fragments.ServicesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val exploreFragment: ExploreFragment
     private val favoritesFragment: FavoritesFragment
-    private val reviewFragment: ReviewFragment
+    private val servicesFragment: ServicesFragment
 
     init {
         exploreFragment = ExploreFragment()
         favoritesFragment = FavoritesFragment()
-        reviewFragment = ReviewFragment()
+        servicesFragment = ServicesFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_explore -> transaction.replace(R.id.fragment_container, exploreFragment)
             R.id.navigation_favorites -> transaction.replace(R.id.fragment_container, favoritesFragment)
-            R.id.navigation_reviews -> transaction.replace(R.id.fragment_container, reviewFragment)
+            R.id.navigation_services -> transaction.replace(R.id.fragment_container, servicesFragment)
 
         }
 
@@ -57,6 +59,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun refreshReviewPage(view: View) {
-        reviewFragment.refreshPage(view)
+        servicesFragment.refreshPage(view)
     }
 }

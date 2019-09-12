@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nyenjes.safari.R
 import com.nyenjes.safari.model.Review
 
+
 class ReviewsCardAdapter : RecyclerView.Adapter<ReviewsCardHolder>() {
     var reviews: ArrayList<Review> = ArrayList()
 
@@ -29,9 +30,12 @@ class ReviewsCardAdapter : RecyclerView.Adapter<ReviewsCardHolder>() {
         holder.cardTitle.text = currentItem.title
         holder.cardDecription.text = currentItem.comment
         for (i in 0 until currentItem.rating!!.toInt()) {
+            val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             val imageStar = ImageView(holder.itemView.context)
+            imageStar.setLayoutParams(params)
+
             imageStar.setImageResource(R.drawable.ic_star)
-//            imageStar.setColorFilter(Color.YELLOW, PorterDuff.Mode.DARKEN)
+            imageStar.setColorFilter(Color.YELLOW, PorterDuff.Mode.LIGHTEN)
             holder.imageLinearLayout.addView(imageStar)
         }
 

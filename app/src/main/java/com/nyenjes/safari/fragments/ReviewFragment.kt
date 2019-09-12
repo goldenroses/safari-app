@@ -40,7 +40,6 @@ class ReviewFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_review, container, false)
         progressBar = view.findViewById(R.id.progressBar)
 
-
         awsService = ServiceBuilder.buildService(AwsService::class.java)
 
         recyclerView = view.findViewById(R.id.recyclerView)
