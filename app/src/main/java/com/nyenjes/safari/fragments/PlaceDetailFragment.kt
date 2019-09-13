@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.nyenjes.safari.R
@@ -30,7 +31,6 @@ import retrofit2.Response
 
 class PlaceDetailFragment : Fragment() {
 
-    private var _firebaseManager: FirebaseManager? = FirebaseManager()
     private var imageView: ImageView? = null
     private val TAG: String = "PlaceDetailFragment"
     private var awsService: AwsService? = null
@@ -59,6 +59,8 @@ class PlaceDetailFragment : Fragment() {
 
         //set placeId in parent activity
         (activity as PlaceDetailActivity).placeObject = placeObject
+        root!!.textPlaceContent.setTypeface(ResourcesCompat.getFont(context!!, R.font.cute))
+        root!!.textContentTitle.setTypeface(ResourcesCompat.getFont(context!!, R.font.cute))
 
         root!!.textPlaceContent.text = placeObject.content
         root!!.textPlaceContent.setMovementMethod(ScrollingMovementMethod())
@@ -99,7 +101,6 @@ class PlaceDetailFragment : Fragment() {
 
         })
     }
-
 
     fun loadFave() {
         try {

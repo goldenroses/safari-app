@@ -4,6 +4,7 @@ package com.nyenjes.safari.fragments
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,9 @@ import com.nyenjes.safari.model.Place
 import org.jetbrains.anko.doAsync
 
 class FavoritesFragment : Fragment() {
+
+    private val TAG: String = "FavoritesFragment"
+
 
     private var faveRecycler: RecyclerView? = null
     private var faveManager: SafariDataManager? = null
@@ -67,6 +71,11 @@ class FavoritesFragment : Fragment() {
             dialog.show()
 
         }
+    }
+
+    fun refreshPage(view: View) {
+        fragmentManager!!.beginTransaction().detach(this).attach(this).commit();
+        Log.d(TAG, "refreshExplorePage")
     }
 
 }

@@ -2,6 +2,7 @@ package com.nyenjes.safari.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,7 +15,6 @@ import com.nyenjes.safari.fragments.PlaceDetailFragment
 import com.nyenjes.safari.fragments.ReviewFragment
 import com.nyenjes.safari.model.Place
 import kotlinx.android.synthetic.main.activity_place_detail.*
-
 
 class PlaceDetailActivity : AppCompatActivity() {
 
@@ -49,6 +49,10 @@ class PlaceDetailActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_fave, menu)
@@ -94,6 +98,18 @@ class PlaceDetailActivity : AppCompatActivity() {
 
     fun favoritePlace(view: View) {
         placeDetailFragment.favoritePlace(view)
+    }
+
+    fun refreshPlaceDetailPage(view: View) {
+//        placeDetailFragment.refreshPage(view)
+    }
+
+    fun refreshGuidePage(view: View) {
+        guideFragment.refreshPage(view)
+    }
+
+    fun refreshReviewsPage(view: View) {
+        reviewsFragment.refreshPage(view)
     }
 
 }

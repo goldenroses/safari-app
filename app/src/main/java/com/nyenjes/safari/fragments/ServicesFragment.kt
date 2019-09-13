@@ -25,7 +25,7 @@ class ServicesFragment : Fragment() {
 
     fun refreshPage(view: View) {
         fragmentManager!!.beginTransaction().detach(this).attach(this).commit();
-        Log.d(TAG, "refreshPage")
+        Log.d(TAG, "refreshExplorePage")
     }
 
 }

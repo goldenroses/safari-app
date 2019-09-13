@@ -10,8 +10,6 @@ interface PlaceService {
     @GET("/place")
     fun  getPlaces(): Call<List<Place>>
 
-
     @GET("/place/{id}")
     fun getPlaceById(@Path("id") id: Long): Call<Place>
-
 }

@@ -45,13 +45,13 @@
                     android:layout_height="wrap_content" android:id="@+id/cardDescription"
                     app:layout_constraintTop_toBottomOf="@+id/cardTitle" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/cardImageView"
-                    android:layout_marginStart="8dp" android:textSize="28dp"/>
+                    android:layout_marginStart="8dp" android:textSize="18dp"/>
             <TextView
                     android:text="Approx: KES 2300 - 5000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textPrice"
                     app:layout_constraintTop_toBottomOf="@+id/cardDescription"
-                    android:textSize="16sp" android:layout_marginTop="44dp"
+                    android:textSize="16dp" android:layout_marginTop="44dp"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toEndOf="@+id/cardImageView" android:layout_marginStart="16dp"/>

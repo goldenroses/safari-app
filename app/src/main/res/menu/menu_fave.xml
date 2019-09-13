@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/action_favorite"
+            android:id="@+id/action_add_review"
             app:showAsAction="always"
-            android:title="Chat"/>
+            android:title="Add Review"/>
     <item
             android:id="@+id/action_share"
             android:icon="@drawable/ic_share"

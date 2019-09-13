@@ -2,12 +2,15 @@ package com.nyenjes.safari.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -67,6 +70,8 @@ class ReviewFragment : Fragment() {
                 val jsonReviewsString = Gson().toJson(response.body())
                 if(response.body() == null) {
                     hideDialog()
+                    textErrorDescription.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
+                    btnRetry.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
                     btnRetry.isVisible = true
                     return
                 }
@@ -77,7 +82,7 @@ class ReviewFragment : Fragment() {
 
                 cardAdapter!!.reviews = reviewsArray
                 if(cardAdapter!!.reviews.size == 0) {
-                    val defaultReview = Review(1, "No reviews yet", "0", "No reviews yet")
+                    val defaultReview = Review(1, "No guides yet", "0", "No guides yet")
                     reviewsArray.add(defaultReview)
                 }
                 cardAdapter!!.notifyDataSetChanged()
@@ -86,6 +91,34 @@ class ReviewFragment : Fragment() {
         })
 
         return view
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_add_review -> {
+                addReviewDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun addReviewDialog(): Boolean {
+        val alert = AlertDialog.Builder(context!!)
+        alert.setTitle("Do you want to logout?")
+        // alert.setMessage("Message");
+
+        alert.setPositiveButton("Ok") { dialog, whichButton ->
+            //Your action here
+        }
+
+        alert.setNegativeButton(
+            "Cancel"
+        ) { dialog, whichButton -> }
+
+        alert.show()
+        return true
     }
 
     private fun showDialog() {
@@ -100,6 +133,6 @@ class ReviewFragment : Fragment() {
 
     fun refreshPage(view: View) {
         fragmentManager!!.beginTransaction().detach(this).attach(this).commit();
-        Log.d(TAG, "refreshPage")
+        Log.d(TAG, "refreshExplorePage")
     }
 }

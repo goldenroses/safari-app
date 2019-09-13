@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,8 @@ import com.nyenjes.safari.model.Place
 import com.nyenjes.safari.services.PlaceService
 import com.nyenjes.safari.services.ServiceBuilder
 import kotlinx.android.synthetic.main.fragment_explore.*
+import kotlinx.android.synthetic.main.fragment_explore.btnRetry
+import kotlinx.android.synthetic.main.fragment_explore.errorMessageCard
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -43,10 +46,11 @@ class ExploreFragment : Fragment() {
         val call = placeService.getPlaces()
         call.enqueue(object: Callback<List<Place>> {
             override fun onFailure(call: retrofit2.Call<List<Place>>, t: Throwable) {
-                Log.d(TAG, "placeService.getReviews() failed")
-                hideDialog()
+                Log.d(TAG, "placeService.getGuides() failed")
+                textErrorDescription.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
+                btnRetry.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
                 errorMessageCard.isVisible = true
-                btnRetry.isVisible = true
+                hideDialog()
             }
 
             override fun onResponse(call: retrofit2.Call<List<Place>>, response: Response<List<Place>>) {
@@ -54,7 +58,9 @@ class ExploreFragment : Fragment() {
 
                 val jsonPlacesString = Gson().toJson(response.body())
                 if(response.body() == null) {
-                    btnRetry.isVisible = true
+                    textErrorDescription.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
+                    btnRetry.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
+                    errorMessageCard.isVisible = true
                     hideDialog()
                     return
                 }
@@ -91,6 +97,6 @@ class ExploreFragment : Fragment() {
 
     fun refreshPage(view: View) {
         fragmentManager!!.beginTransaction().detach(this).attach(this).commit();
-        Log.d(TAG, "refreshPage")
+        Log.d(TAG, "refreshExplorePage")
     }
 }

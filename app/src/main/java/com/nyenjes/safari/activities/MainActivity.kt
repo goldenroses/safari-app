@@ -39,6 +39,11 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         val transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -54,11 +59,15 @@ class MainActivity : AppCompatActivity() {
         true
     }
 
-    fun refreshPage(view: View) {
+    fun refreshExplorePage(view: View) {
         exploreFragment.refreshPage(view)
     }
 
-    fun refreshReviewPage(view: View) {
+    fun refreshServicesPage(view: View) {
         servicesFragment.refreshPage(view)
+    }
+
+    fun refreshFavoritesPage(view: View) {
+        favoritesFragment.refreshPage(view)
     }
 }

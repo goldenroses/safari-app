@@ -36,7 +36,7 @@ class CardAdapter : RecyclerView.Adapter<CardHolder>() {
 
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
         holder.cardTitle.setTypeface(ResourcesCompat.getFont(holder.itemView.context, R.font.traveller))
-        holder.cardDecription.setTypeface(ResourcesCompat.getFont(holder.itemView.context, R.font.cash))
+        holder.cardDecription.setTypeface(ResourcesCompat.getFont(holder.itemView.context, R.font.cute))
         holder.price.setTypeface(ResourcesCompat.getFont(holder.itemView.context, R.font.cash_bold))
 
         var currentItem = places[position]

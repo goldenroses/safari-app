@@ -5,10 +5,10 @@
              android:layout_height="match_parent"
              tools:context=".fragments.ServicesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Services will be listed here"/>
+<androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+</androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
