@@ -75,7 +75,7 @@ class FirebaseManager {
 
         if (_user != null) {
             // email verification - disabled user.isEmailVerified()
-            if (true) {
+            if (_user!!.isEmailVerified()) {
 
                 Log.d(TAG, "onAuthStateChanged:signed_in:::::" + _user!!.getUid());
                 isLoggedIn = true

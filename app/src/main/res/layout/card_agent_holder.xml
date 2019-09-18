@@ -16,7 +16,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             <ImageView
                     android:layout_width="99dp"
@@ -25,37 +25,37 @@
                     android:id="@+id/cardImageView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="28dp" app:layout_constraintVertical_bias="0.0"/>
-            <TextView
-                    android:text="an awesome agent"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/cardTitle"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/cardDescription"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/cardImageView"/>
-
-            <TextView
-                    android:text="ready to take you on tour"
-                    android:overScrollMode="ifContentScrolls"
+                    android:layout_marginEnd="8dp" app:layout_constraintVertical_bias="0.0"/>
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cardDescription"
-                    android:textSize="18dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toStartOf="@+id/cardImageView"/>
+                    android:layout_height="match_parent" app:layout_constraintEnd_toStartOf="@+id/cardImageView"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                        android:text="an awesome agent"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/cardTitle"
+                        android:layout_marginStart="16dp"/>
+                <TextView
+                        android:text="Ready to take you on tour"
+                        android:overScrollMode="ifContentScrolls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardDescription"
+                        android:textSize="18dp"
+                        android:layout_marginStart="16dp"
+                />
+            </LinearLayout>
+
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/linearLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginStart="19dp" app:layout_constraintStart_toEndOf="@+id/cardTitle"
                     app:layout_constraintTop_toBottomOf="@+id/cardImageView">
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                             android:layout_width="20sp"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_thumb_up"
-                            android:id="@+id/imageDownVote"
+                            android:id="@+id/imageUpVote"
                             android:tint="#527A3C"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textDownvote"
@@ -96,7 +96,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageDownVote" android:layout_marginStart="8dp"/>
+                            app:layout_constraintStart_toEndOf="@+id/imageUpVote" android:layout_marginStart="8dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

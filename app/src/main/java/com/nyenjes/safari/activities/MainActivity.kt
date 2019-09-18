@@ -1,15 +1,18 @@
 package com.nyenjes.safari.activities
 
-import android.app.Service
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nyenjes.safari.R
 import com.nyenjes.safari.fragments.ExploreFragment
 import com.nyenjes.safari.fragments.FavoritesFragment
-import com.nyenjes.safari.fragments.ReviewFragment
-import com.nyenjes.safari.R
 import com.nyenjes.safari.fragments.ServicesFragment
+import com.nyenjes.safari.services.ReviewService
+import com.nyenjes.safari.services.ServiceBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +45,25 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                true
+            }
+            R.id.action_about -> {
+                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

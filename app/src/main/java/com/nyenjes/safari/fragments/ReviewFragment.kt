@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
@@ -30,6 +31,7 @@ class ReviewFragment : Fragment() {
     private val TAG: String = "ReviewFragment"
 
     var awsService: AwsService? = null
+    var reviewService: ReviewService? = null
     var cardAdapter: ReviewsCardAdapter? = ReviewsCardAdapter()
     var reviewsArray : ArrayList<Review> = ArrayList()
     var recyclerView : RecyclerView? = null
@@ -52,9 +54,9 @@ class ReviewFragment : Fragment() {
 
         val placeId = (activity as PlaceDetailActivity).placeObject.id!!
 
-        val reviewService = ServiceBuilder.buildService(ReviewService::class.java)
+        reviewService = ServiceBuilder.buildService(ReviewService::class.java)
 
-        val call = reviewService.getReviewsByPlaceId(placeId)
+        val call = reviewService!!.getReviewsByPlaceId(placeId)
 
         call.enqueue(object : Callback<List<Review>> {
             override fun onFailure(call: Call<List<Review>>, t: Throwable) {
@@ -82,7 +84,8 @@ class ReviewFragment : Fragment() {
 
                 cardAdapter!!.reviews = reviewsArray
                 if(cardAdapter!!.reviews.size == 0) {
-                    val defaultReview = Review(1, "No guides yet", "0", "No guides yet")
+                    cardAdapter!!.reviews.clear()
+                    val defaultReview = Review(1, "No Reviews yet", "0", "No reviews yet")
                     reviewsArray.add(defaultReview)
                 }
                 cardAdapter!!.notifyDataSetChanged()
@@ -93,33 +96,6 @@ class ReviewFragment : Fragment() {
         return view
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_add_review -> {
-                addReviewDialog()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    }
-
-    private fun addReviewDialog(): Boolean {
-        val alert = AlertDialog.Builder(context!!)
-        alert.setTitle("Do you want to logout?")
-        // alert.setMessage("Message");
-
-        alert.setPositiveButton("Ok") { dialog, whichButton ->
-            //Your action here
-        }
-
-        alert.setNegativeButton(
-            "Cancel"
-        ) { dialog, whichButton -> }
-
-        alert.show()
-        return true
-    }
 
     private fun showDialog() {
         progressBar!!.setVisibility(View.VISIBLE);
@@ -135,4 +111,5 @@ class ReviewFragment : Fragment() {
         fragmentManager!!.beginTransaction().detach(this).attach(this).commit();
         Log.d(TAG, "refreshExplorePage")
     }
+
 }

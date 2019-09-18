@@ -1,17 +1,16 @@
 package com.nyenjes.safari.adapters
 
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nyenjes.safari.R
 import com.nyenjes.safari.model.Review
-
 
 class ReviewsCardAdapter : RecyclerView.Adapter<ReviewsCardHolder>() {
     var reviews: ArrayList<Review> = ArrayList()
@@ -30,12 +29,11 @@ class ReviewsCardAdapter : RecyclerView.Adapter<ReviewsCardHolder>() {
         holder.cardTitle.text = currentItem.title
         holder.cardDecription.text = currentItem.comment
         for (i in 0 until currentItem.rating!!.toInt()) {
-            val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             val imageStar = ImageView(holder.itemView.context)
-            imageStar.setLayoutParams(params)
 
             imageStar.setImageResource(R.drawable.ic_star)
-            imageStar.setColorFilter(Color.YELLOW, PorterDuff.Mode.LIGHTEN)
+            imageStar.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.yellowAccent))
+
             holder.imageLinearLayout.addView(imageStar)
         }
 
@@ -49,19 +47,21 @@ class ReviewsCardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cardTitle = itemView.findViewById<TextView>(R.id.cardTitle)
     val cardDecription = itemView.findViewById<TextView>(R.id.cardDescription)
     val imageStar = itemView.findViewById<ImageView>(R.id.cardImageView)
-    val imageLinearLayout = itemView.findViewById<LinearLayout>(R.id.linearLayout)
-    val foundUseful = itemView.findViewById<ImageView>(R.id.imageDownVote)
-    val foundNotUseful = itemView.findViewById<ImageView>(R.id.textfoundNotUseful)
+    val imageLinearLayout = itemView.findViewById<LinearLayout>(R.id.startsLinearLayout)
+    val foundUseful = itemView.findViewById<ImageView>(R.id.reviewImageUpVote)
+    val foundNotUseful = itemView.findViewById<ImageView>(R.id.reviewImageDownVote)
 
     var currentReviewtem: Review? = null
 
-//    init {
-//        cardTitle.setOnClickListener {
-//            val intent = Intent(itemView.context, PlaceDetailActivity::class.java)
-//            intent.putExtra("currentReviewtem", Gson().toJson(currentReviewtem))
-//            itemView.context.startActivity(intent)
-//        }
-//    }
+    init {
+        foundUseful.setOnClickListener {
+            Toast.makeText(itemView.context, "Upvoted", Toast.LENGTH_SHORT).show()
+        }
+
+        foundNotUseful.setOnClickListener {
+            Toast.makeText(itemView.context, "Downvoted", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     fun updateCurrentItem(currentItem: Review) {
         currentReviewtem = currentItem

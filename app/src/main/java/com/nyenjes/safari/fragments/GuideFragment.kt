@@ -57,7 +57,7 @@ class GuideFragment : Fragment() {
 
         call.enqueue(object : Callback<List<Guide>> {
             override fun onFailure(call: Call<List<Guide>>, t: Throwable) {
-                Log.d(TAG, "GuideFragment.getGuides() failed: PlaceId : ${placeId}")
+                Log.d(TAG, "GuideFragment.getServices() failed: PlaceId : ${placeId}")
                 hideDialog()
                 textErrorDescription.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
                 btnRetry.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
@@ -65,7 +65,7 @@ class GuideFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<List<Guide>>, response: Response<List<Guide>>) {
-                Log.d(TAG,"----------------GuideFragment.getGuides(): ------- :${response.body()}")
+                Log.d(TAG,"----------------GuideFragment.getServices(): ------- :${response.body()}")
 
                 val jsonReviewsString = Gson().toJson(response.body())
                 if(response.body() == null) {
@@ -82,7 +82,7 @@ class GuideFragment : Fragment() {
 
                 adapter!!.guides = guideArray
                 if(adapter!!.guides.size == 0) {
-                    val defaultGuide = Guide(1, "No guides yet", "0", 1,1,1)
+                    val defaultGuide = Guide(1, "No services yet", "0", 1,1,1)
                     guideArray.add(defaultGuide)
                 }
                 adapter!!.notifyDataSetChanged()

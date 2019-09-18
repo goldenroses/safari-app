@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/action_add_review"
-            app:showAsAction="always"
-            android:title="Add Review"/>
+            android:id="@+id/action_logout"
+            app:showAsAction="never"
+            android:title="Logout"/>
     <item
-            android:id="@+id/action_share"
+            android:id="@+id/action_about"
             android:icon="@drawable/ic_compare_arrows"
             app:showAsAction="ifRoom"
-            android:title="Share"/>
+            android:title="About"/>
 </menu>

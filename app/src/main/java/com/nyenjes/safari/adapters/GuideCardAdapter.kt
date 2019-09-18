@@ -12,7 +12,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.nyenjes.safari.R
 import com.nyenjes.safari.model.Guide
-import com.nyenjes.safari.model.Review
 
 class GuideCardAdapter : RecyclerView.Adapter<GuideCardHolder>() {
     var guides: ArrayList<Guide> = ArrayList()
@@ -55,8 +54,8 @@ class GuideCardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cardTitle = itemView.findViewById<TextView>(R.id.cardTitle)
     val cardDecription = itemView.findViewById<TextView>(R.id.cardDescription)
     val imageStar = itemView.findViewById<ImageView>(R.id.cardImageView)
-    val imageLinearLayout = itemView.findViewById<LinearLayout>(R.id.linearLayout)
-    val foundUseful = itemView.findViewById<ImageView>(R.id.imageDownVote)
+    val imageLinearLayout = itemView.findViewById<LinearLayout>(R.id.contentLinearLayout)
+    val foundUseful = itemView.findViewById<ImageView>(R.id.imageUpVote)
     val foundNotUseful = itemView.findViewById<ImageView>(R.id.textfoundNotUseful)
 
     var currentReviewtem: Guide? = null

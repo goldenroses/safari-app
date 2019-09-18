@@ -46,7 +46,7 @@ class ExploreFragment : Fragment() {
         val call = placeService.getPlaces()
         call.enqueue(object: Callback<List<Place>> {
             override fun onFailure(call: retrofit2.Call<List<Place>>, t: Throwable) {
-                Log.d(TAG, "placeService.getGuides() failed")
+                Log.d(TAG, "placeService.getServices() failed")
                 textErrorDescription.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
                 btnRetry.setTypeface(ResourcesCompat.getFont(context!!, R.font.traveller))
                 errorMessageCard.isVisible = true

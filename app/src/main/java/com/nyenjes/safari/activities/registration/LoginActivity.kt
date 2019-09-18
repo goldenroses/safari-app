@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             val user = _firebaseManager._user
             if (user != null) {
                 // email verification - disabled user.isEmailVerified()
-                if (true) {
+                if (user.isEmailVerified()) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Toast.makeText(this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT)
                         .show()
