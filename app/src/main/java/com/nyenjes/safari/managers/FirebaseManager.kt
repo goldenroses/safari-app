@@ -62,9 +62,6 @@ class FirebaseManager {
 
         }
 
-//        adminDbRef.addChildEventListener(listener)
-//        Log.d(TAG, "Checking if isAdmin after listener again: ${_isAdmin}")
-
     }
 
     // Authentication

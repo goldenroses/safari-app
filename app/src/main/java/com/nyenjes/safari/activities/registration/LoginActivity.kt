@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             val user = _firebaseManager._user
             if (user != null) {
                 // email verification - disabled user.isEmailVerified()
-                if (user.isEmailVerified()) {
+                if (true) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Toast.makeText(this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT)
                         .show()
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this@LoginActivity, "Email is not Verified\nCheck your Inbox", Toast.LENGTH_SHORT)
                         .show()
-                    FirebaseAuth.getInstance().signOut()
+                    _firebaseManager._firebaseAuth!!.signOut()
                 }
             }
         }
@@ -79,16 +79,15 @@ class LoginActivity : AppCompatActivity() {
                     editTextEmail.text.toString(),
                     editTextPassword.text.toString()
                 )
-                    .addOnCompleteListener {
+                    .addOnCompleteListener { task ->
                         hideDialog()
-                        if(it.isSuccessful) {
-                            val uid = it.result!!.user.uid
-                            _firebaseManager.isAdmin(uid)
+                        if(task.isSuccessful) {
+                            val uid = task.result!!.user.uid
                             val intent: Intent = Intent(this, MainActivity::class.java)
                             Toast.makeText(this, "Successfully authenticated", Toast.LENGTH_SHORT).show()
                             startActivity(intent)
                         }
-                        if(it.isCanceled) {
+                        if(task.isCanceled) {
                             Toast.makeText(this, "Login/Username Invalid", Toast.LENGTH_SHORT).show()
 
                         }
@@ -216,7 +215,6 @@ class LoginActivity : AppCompatActivity() {
             hideDialog()
         }
     }
-
 
     override fun onStart() {
         super.onStart()

@@ -14,12 +14,10 @@ import com.nyenjes.safari.R
 import com.nyenjes.safari.SafariApplication
 import com.nyenjes.safari.activities.PlaceDetailActivity
 import com.nyenjes.safari.adapters.PagerAdapter
-import com.nyenjes.safari.managers.FirebaseManager
 import com.nyenjes.safari.managers.SafariDataManager
 import com.nyenjes.safari.model.Image
 import com.nyenjes.safari.model.Place
 import com.nyenjes.safari.services.AwsService
-import com.nyenjes.safari.services.PlaceService
 import com.nyenjes.safari.services.ServiceBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_place_detail.*
@@ -27,7 +25,6 @@ import kotlinx.android.synthetic.main.fragment_place_detail.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class PlaceDetailFragment : Fragment() {
 

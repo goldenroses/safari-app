@@ -11,8 +11,6 @@ import com.nyenjes.safari.R
 import com.nyenjes.safari.fragments.ExploreFragment
 import com.nyenjes.safari.fragments.FavoritesFragment
 import com.nyenjes.safari.fragments.ServicesFragment
-import com.nyenjes.safari.services.ReviewService
-import com.nyenjes.safari.services.ServiceBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

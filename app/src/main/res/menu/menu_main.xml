@@ -10,4 +10,10 @@
             android:icon="@drawable/ic_compare_arrows"
             app:showAsAction="ifRoom"
             android:title="About"/>
+
+    <item
+            android:id="@+id/action_show_notification"
+            android:icon="@drawable/ic_compare_arrows"
+            app:showAsAction="ifRoom"
+            android:title="About"/>
 </menu>

@@ -1,6 +1,5 @@
 package com.nyenjes.safari.fragments
 
-
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
@@ -22,7 +21,6 @@ import org.jetbrains.anko.doAsync
 class FavoritesFragment : Fragment() {
 
     private val TAG: String = "FavoritesFragment"
-
 
     private var faveRecycler: RecyclerView? = null
     private var faveManager: SafariDataManager? = null

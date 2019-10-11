@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginStart
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.nyenjes.safari.R
@@ -103,11 +105,17 @@ class PlaceDetailActivity : AppCompatActivity() {
     }
 
     private fun addReviewDialog(): Boolean {
-        val titleText = EditText(this)
-        titleText.setPadding(5, 5, 5, 5)
+        val textLayout = LinearLayout(this)
+        textLayout.orientation = LinearLayout.VERTICAL
+        textLayout.layoutParams = ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        textLayout.layoutParams.width = MATCH_PARENT
+        textLayout.setPadding(10, 10, 10, 10)
 
+        val titleText = EditText(this)
         val commentText = EditText(this)
-        commentText.setPadding(5, 5, 5, 5)
+
+        textLayout.addView(titleText)
+        textLayout.addView(commentText)
 
         val ratingLayout = LinearLayout(this)
         ratingLayout.orientation = LinearLayout.HORIZONTAL
@@ -128,15 +136,15 @@ class PlaceDetailActivity : AppCompatActivity() {
         ratingLayout.addView(ratingBar)
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL
-        layout.layoutParams = ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        layout.textAlignment = LinearLayout.TEXT_ALIGNMENT_CENTER
+        layout.layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         layout.setPadding(10, 10, 10, 10)
 
         val alert = AlertDialog.Builder(this)
         alert.setTitle("Add a review")
         layout.addView(ratingLayout)
 
-        layout.addView(titleText)
-        layout.addView(commentText)
+        layout.addView(textLayout)
 
         titleText.setHint("Title goes here")
         commentText.setHint("Comment...")
@@ -220,14 +228,9 @@ class PlaceDetailActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Review> {
             override fun onFailure(request: Call<Review>, t: Throwable) {
                 Log.d(TAG, "reviewService.createReview() failed : ${title}")
-                errorMessageCard.isVisible = true
-                btnRetry.isVisible = true
             }
 
             override fun onResponse(request: Call<Review>, response: Response<Review>) {
-                Log.d(TAG, "----------------reviewService.createReview(): ------- :${response.body()}")
-
-                val jsonReviewsString = Gson().toJson(response.body())
                 if (response.body() == null) {
                     textErrorDescription.setTypeface(
                         ResourcesCompat.getFont(

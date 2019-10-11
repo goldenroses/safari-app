@@ -2,9 +2,10 @@ package com.nyenjes.safari.repositories
 
 import com.nyenjes.safari.model.Place
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.db.*
-
-import org.jetbrains.anko.info
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 
 private val logger: AnkoLogger = AnkoLogger<String>()
 
